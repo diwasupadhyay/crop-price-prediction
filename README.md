@@ -167,10 +167,6 @@ The animation will automatically generate placeholder frames if images are missi
 
 ## 👥 Team
 
-- **Rahul Sharma** - ML Engineer
-- **Priya Patel** - Frontend Developer  
-- **Amit Kumar** - Backend Developer
-- **Sneha Reddy** - Data Analyst
 
 ## 📄 License
 
