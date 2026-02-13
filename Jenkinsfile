@@ -14,6 +14,15 @@ pipeline {
             }
         }
 
+        stage('Setup Environment') {
+            steps {
+                // Copy the .env secret file from Jenkins credentials
+                withCredentials([file(credentialsId: 'crop-env-file', variable: 'ENV_FILE')]) {
+                    bat 'copy "%ENV_FILE%" .env'
+                }
+            }
+        }
+
         stage('Install Dependencies') {
             steps {
                 bat 'npm install'
@@ -36,7 +45,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 bat 'docker-compose down'
-                bat 'docker-compose up -d'
+                bat 'docker-compose up --build -d'
             }
         }
     }
