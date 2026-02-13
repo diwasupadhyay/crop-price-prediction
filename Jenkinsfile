@@ -44,6 +44,8 @@ pipeline {
 
         stage('Deploy') {
             steps {
+                bat 'docker stop crop-client || exit 0'
+                bat 'docker rm crop-client || exit 0'
                 bat 'docker-compose down'
                 bat 'docker-compose up --build -d'
             }
