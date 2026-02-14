@@ -53,4 +53,4 @@ client/
 
 ## License
 
-B.Tech CSE Capstone Project.
+B.Tech CSE Capstone 1 Project.
