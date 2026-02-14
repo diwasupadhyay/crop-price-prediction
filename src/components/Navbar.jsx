@@ -54,17 +54,17 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50">
+      <nav className="fixed top-4 left-0 right-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
-          <div className="flex items-center justify-between">
+          <div className="relative flex items-center justify-between">
 
             {/* Left — Logo */}
-            <Link to="/" className="text-white font-bold text-lg tracking-tight shrink-0">
+            <Link to="/" className="text-white font-bold text-lg tracking-tight shrink-0 mr-auto">
               Crop<span className="text-emerald-400">Price</span>
             </Link>
 
-            {/* Center — Nav Pill (Desktop) */}
-            <div className="hidden md:flex items-center gap-1 px-2 py-2 rounded-full bg-white/[0.08] backdrop-blur-2xl border border-white/[0.12] shadow-[0_8px_32px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.1)]">
+            {/* Center — Nav Pill (Desktop) — absolutely centered */}
+            <div className="hidden md:flex items-center gap-1 px-2 py-2 rounded-full bg-white/[0.08] backdrop-blur-2xl border border-white/[0.12] shadow-[0_8px_32px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.1)] absolute left-1/2 -translate-x-1/2">
               {navItems.map((item) => (
                 <Link
                   key={item.name}
@@ -80,26 +80,19 @@ const Navbar = () => {
                   <span className="relative z-10">{item.name}</span>
                 </Link>
               ))}
+              {!currentUser && (
+                <Link
+                  to="/login"
+                  className="relative px-5 py-2.5 text-sm font-medium rounded-full transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] text-gray-300 hover:text-white hover:bg-white/[0.08]"
+                >
+                  <span className="relative z-10">Login</span>
+                </Link>
+              )}
             </div>
 
-            {/* Right — Auth / Profile */}
-            <div className="hidden md:flex items-center gap-3 shrink-0">
-              {!currentUser ? (
-                <div className="flex items-center gap-1 px-2 py-1.5 rounded-full bg-white/[0.08] backdrop-blur-2xl border border-white/[0.12] shadow-[0_8px_32px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.1)]">
-                  <Link
-                    to="/login"
-                    className="px-4 py-1.5 text-sm font-medium text-gray-300 hover:text-white transition-colors duration-300"
-                  >
-                    Login
-                  </Link>
-                  <Link
-                    to="/signup"
-                    className="px-5 py-1.5 text-sm font-medium rounded-full bg-gradient-to-r from-emerald-500 to-green-600 text-white hover:from-emerald-600 hover:to-green-700 transition-all duration-300 shadow-[0_2px_12px_rgba(16,185,129,0.3)]"
-                  >
-                    Sign Up
-                  </Link>
-                </div>
-              ) : (
+            {/* Right — Profile (logged in only) */}
+            <div className="hidden md:flex items-center shrink-0">
+              {currentUser && (
                 <div className="relative" ref={profileRef}>
                   <button
                     onClick={() => setIsProfileOpen(!isProfileOpen)}
@@ -203,22 +196,13 @@ const Navbar = () => {
                   Sign out
                 </button>
               ) : (
-                <div className="space-y-2">
-                  <Link
-                    to="/login"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="block px-5 py-3.5 rounded-xl text-base font-medium text-gray-400 hover:text-white hover:bg-emerald-500/10 transition-all duration-300"
-                  >
-                    Login
-                  </Link>
-                  <Link
-                    to="/signup"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="block px-5 py-3.5 rounded-xl text-base font-medium text-white bg-gradient-to-r from-emerald-500 to-green-600 text-center transition-all duration-300"
-                  >
-                    Sign Up
-                  </Link>
-                </div>
+                <Link
+                  to="/login"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block px-5 py-3.5 rounded-xl text-base font-medium text-gray-400 hover:text-white hover:bg-emerald-500/10 transition-all duration-300"
+                >
+                  Login
+                </Link>
               )}
             </div>
 
